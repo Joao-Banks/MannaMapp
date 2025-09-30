@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div>
-      <h1>MannaMap</h1>
+      <h1 className="title">MannaMap</h1>
       <Hero />
       <Search />
       <Wards></Wards>

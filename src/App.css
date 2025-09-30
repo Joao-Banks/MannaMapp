@@ -1,38 +1,36 @@
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;700&family=Rye&display=swap");
+
+:root {
+  /* Colors */
+  --color-primary: #a68c70;
+  --color-secondary: #5e4534;
+  --color-background: #e8dcc5;
+  --color-accent: #d1bfa6;
+  --color-text: #2a261e;
+
+  /* Typography */
+  --font-family-heading: "Rye", cursive;
+  --font-family-body: "Bitter", serif;
+}
+
+body {
+  font-family: var(--font-family-body);
+  background-color: var(--color-background);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-family-heading);
+  color: var(--color-secondary);
+}
+
+p {
+  font-family: var(--font-family-body);
+  color: var(--color-text);
+}
+
+.title {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  color: var(--color-text);
 }
