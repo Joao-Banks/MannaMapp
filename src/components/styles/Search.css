@@ -1,0 +1,70 @@
+/* ----- Overall page layout ----- */
+.search-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Inter", sans-serif;
+  background-color: var(--color-background); /* soft warm beige base */
+}
+
+/* Header */
+.search-header {
+  padding-top: 20px;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-secondary); /* toasted crust tone */
+  text-shadow: 0 1px 2px rgba(139, 94, 60, 0.15); /* subtle warmth */
+}
+
+/* Search controls: input + dropdown */
+.search-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Input + Select styling */
+.search-input,
+.search-select {
+  font-family: "Bitter", serif;
+  padding: 0.7rem 1.1rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  color: var(--color-text);
+  background-color: var(--color-highlight); /* soft bread interior */
+  border: 2px solid var(--color-accent); /* buttery edge */
+  box-shadow: 0 1px 4px rgba(139, 94, 60, 0.1);
+  width: 48%;
+  min-width: 240px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input:focus,
+.search-select:focus {
+  font-family: "Bitter", serif;
+  outline: none;
+  border-color: var(--color-primary); /* golden highlight on focus */
+  box-shadow: 0 0 6px rgba(200, 162, 106, 0.4);
+}
+
+/* Dropdown hover — warm golden glow */
+.search-select option:hover {
+  background-color: var(--color-primary);
+  color: var(--color-highlight);
+}
+
+/* Results wrapper */
+.search-results {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}

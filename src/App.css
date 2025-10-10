@@ -2,11 +2,12 @@
 
 :root {
   /* Colors */
-  --color-primary: #a68c70;
-  --color-secondary: #5e4534;
-  --color-background: #e8dcc5;
-  --color-accent: #d1bfa6;
-  --color-text: #2a261e;
+  --color-primary: #c8a26a; /* golden brown crust */
+  --color-secondary: #8b5e3c; /* toasted crust edge */
+  --color-highlight: #fff3da; /* bread crumb interior */
+  --color-background: #f0dfb8; /* warm beige background */
+  --color-accent: #e4cfa4; /* soft buttered tone */
+  --color-text: #3b2c1a;
 
   /* Typography */
   --font-family-heading: "Rye", cursive;
@@ -31,6 +32,8 @@ p {
 }
 
 .title {
+  padding-top: 20px;
   text-align: center;
-  color: var(--color-text);
+  font-size: 3rem;
+  color: var(--color-secondary);
 }
