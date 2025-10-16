@@ -1,5 +1,6 @@
 import "./styles/Ward.css";
-
+import AddReview from "./AddReview";
+import SeeReviews from "./SeeReviews";
 function Ward({ name, complexes }) {
   return (
     <div className="ward-card">
@@ -13,8 +14,8 @@ function Ward({ name, complexes }) {
       </p>
 
       <div className="ward-buttons">
-        <button>See Reviews</button>
-        <button>Add a Review</button>
+        <SeeReviews />
+        <AddReview />
       </div>
     </div>
   );

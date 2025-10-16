@@ -2,11 +2,12 @@ import { useState } from "react";
 import wardsData from "./WardsData";
 import Ward from "./Ward";
 import "./styles/Search.css";
+import "./styles/Modal.css";
 
 function Search() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("none");
-  const [showResults, setShowResults] = useState(false); // 👈 start hidden
+  const [showResults, setShowResults] = useState(true); // start hidden
 
   const items = wardsData;
 
