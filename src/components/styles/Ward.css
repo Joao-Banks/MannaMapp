@@ -8,6 +8,8 @@
   padding: 1rem 1.5rem;
   text-align: left;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  color: var(--color-text);
+  font-family: var(--font-family-body);
 }
 
 .ward-card:hover {
@@ -20,7 +22,8 @@
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--color-secondary); /* strong crust tone for title */
+  font-family: var(--font-family-heading);
+  color: var(--color-secondary);
 }
 
 .ward-details {
@@ -62,7 +65,67 @@
 
 .ward-stars {
   font-size: 1.4rem;
-  color: var(--color-accent); /* soft buttery tan for now */
+  color: var(--color-primary);
   letter-spacing: 2px;
   user-select: none;
+}
+
+.reviews-list {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding-right: 8px;
+}
+
+.review-card {
+  background: var(--color-background);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word; /* ✅ breaks long words */
+  white-space: pre-wrap; /* ✅ preserves newlines but wraps text */
+}
+
+.review-rating {
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+}
+
+.review-text {
+  margin: 6px 0;
+  font-style: italic;
+}
+
+.review-meta {
+  color: var(--color-secondary);
+  font-size: 0.85rem;
+}
+
+.ward-stars {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+.avg-number {
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  margin-left: 4px;
+}
+
+.review-rating {
+  color: var(--color-primary);
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  font-weight: bold; /* stars remain bold */
+}
+
+.review-fraction {
+  font-weight: normal; /* ✅ makes the fraction lighter */
+  color: var(--color-secondary); /* or a softer brown tone */
+  margin-left: 4px;
+  font-size: 0.95rem; /* slightly smaller for balance */
 }
