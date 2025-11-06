@@ -1,5 +1,3 @@
-// src/components/Modal.js
-import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 
@@ -18,7 +16,7 @@ function Modal({ isOpen, onClose, children }) {
         {children}
       </div>
     </div>,
-    document.body // 👈 renders above everything in the DOM
+    document.body // renders above everything in the DOM
   );
 }
 

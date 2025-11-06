@@ -1,5 +1,4 @@
-import { useState } from "react";
-import wardsData from "./WardsData";
+import { useState, useEffect } from "react";
 import Ward from "./Ward";
 import "./styles/Search.css";
 import "./styles/Modal.css";
@@ -9,24 +8,44 @@ function Search() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("none");
   const [showResults, setShowResults] = useState(true);
-  const [reviews, setReviews] = useState(reviewsData); // store reviews here
+  const [reviews, setReviews] = useState(reviewsData);
+  const [items, setItems] = useState([]); // list of wards from backend
+  const [loading, setLoading] = useState(true);
 
-  const items = wardsData;
+  // --- Fetch wards from Express API ---
+  useEffect(() => {
+    fetch("http://localhost:4000/api/wards")
+      .then((res) => res.json())
+      .then((data) => {
+        // backend returns ward_id, ward_name, complexes
+        const formatted = data.map((w) => ({
+          ward_id: w.ward_id,
+          name: w.ward_name,
+          complexes: w.complexes ? w.complexes.split(", ") : [],
+          avg_rating: w.avg_rating || 0, // ← new field
+        }));
+        setItems(formatted);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching wards:", err);
+        setLoading(false);
+      });
+  }, []);
 
-  // Add review handler
+  if (loading) return <p>Loading wards...</p>;
+
+  // --- Add review handler (local state only) ---
   function handleAddReview(wardName, newReview) {
     setReviews((prev) => {
       const existingWard = prev.find((w) => w.wardName === wardName);
-
       if (existingWard) {
-        // If ward already exists, just append review
         return prev.map((w) =>
           w.wardName === wardName
             ? { ...w, reviews: [...w.reviews, newReview] }
             : w
         );
       } else {
-        // If ward doesn’t exist yet, add it with the new review
         return [...prev, { wardName, reviews: [newReview] }];
       }
     });
@@ -95,16 +114,19 @@ function Search() {
       {shouldShowResults && (
         <div className="search-results">
           {filteredItems.length > 0 ? (
-            filteredItems.map((item, index) => {
+            filteredItems.map((item) => {
               const wardReviews =
                 reviews.find((r) => r.wardName === item.name)?.reviews || [];
+
               return (
                 <Ward
-                  key={index}
+                  key={item.ward_id}
+                  id={item.ward_id}
                   name={item.name}
                   complexes={item.complexes}
+                  avgRating={item.avg_rating} // ✅ new prop
                   reviews={wardReviews}
-                  onAddReview={handleAddReview} // connect review handler
+                  onAddReview={handleAddReview}
                 />
               );
             })

@@ -77,22 +77,36 @@
   justify-content: center;
   align-items: center;
   margin: 14px 0 10px;
-  font-size: 1.8rem;
+  font-size: 2rem;
+  gap: 4px;
 }
 
 .star {
   cursor: pointer;
-  color: var(--color-accent);
-  transition: color 0.2s, transform 0.1s ease-in-out;
-  margin: 0 2px;
+  color: var(--color-accent); /* soft base tone */
+  transition: transform 0.15s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.star:hover {
+  transform: scale(1.25);
+  color: var(--color-primary);
+  text-shadow: 0 0 6px rgba(200, 162, 106, 0.5);
 }
 
 .star.filled {
   color: var(--color-primary);
+  text-shadow: 0 0 4px rgba(139, 94, 60, 0.4);
 }
 
-.star:hover {
-  transform: scale(1.15);
+/* Optional half-star fallback for cross-platform consistency */
+.star::after {
+  content: "★";
+  position: absolute;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  color: var(--color-primary);
+  transition: width 0.2s ease;
 }
 
 /* --- Submit Button --- */

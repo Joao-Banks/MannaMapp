@@ -1,48 +1,66 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import "./styles/Modal.css";
-import "./styles/AddReview.css"; // new file for form styling
+import "./styles/AddReview.css"; // keep your styling
 
-function AddReview({ wardName, onAddReview }) {
+function AddReview({ wardId, wardName, onReviewAdded }) {
   const [isModalOpen, setModalOpen] = useState(false);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewer, setReviewer] = useState("");
+  const openModal = () => {
+    setModalOpen(true);
+    setRating(0);
+    setHoverRating(0);
+  };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!reviewText.trim() || rating < 1) {
       alert("Please select a rating and write your review.");
       return;
     }
 
-    const today = new Date();
-    const formattedDate = `${String(today.getMonth() + 1).padStart(
-      2,
-      "0"
-    )}-${String(today.getDate()).padStart(2, "0")}-${today.getFullYear()}`;
-
+    // --- Prepare review data ---
     const newReview = {
-      id: Date.now(),
       reviewer: reviewer.trim() || "Anonymous",
       rating,
-      text: reviewText,
-      date: formattedDate,
+      comment: reviewText.trim(),
+      ward_id: wardId,
     };
 
-    onAddReview(wardName, newReview);
+    try {
+      const response = await fetch("http://localhost:4000/api/reviews", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newReview),
+      });
 
-    // reset fields
-    setModalOpen(false);
-    setReviewer("");
-    setReviewText("");
-    setRating(0);
-    setHoverRating(0);
+      const result = await response.json();
+
+      if (result.success) {
+        alert("✅ Review added successfully!");
+        // close modal and reset
+        setModalOpen(false);
+        setReviewer("");
+        setReviewText("");
+        setRating(0);
+        setHoverRating(0);
+
+        // ask parent to refresh the reviews
+        if (onReviewAdded) onReviewAdded();
+      } else {
+        alert("❌ Failed to add review. Please try again.");
+      }
+    } catch (err) {
+      console.error("Error adding review:", err);
+      alert("Server error while adding review.");
+    }
   };
 
   return (
     <>
-      <button className="add-btn" onClick={() => setModalOpen(true)}>
+      <button className="add-btn" onClick={openModal}>
         Add a Review
       </button>
 
@@ -65,12 +83,12 @@ function AddReview({ wardName, onAddReview }) {
             const starValue = i + 1;
             return (
               <span
-                key={starValue}
-                className={
-                  starValue <= (hoverRating || rating) ? "star filled" : "star"
-                }
-                onClick={() => setRating(starValue)}
-                onMouseEnter={() => setHoverRating(starValue)}
+                key={i}
+                className={`star ${
+                  i + 1 <= (hoverRating || rating) ? "filled" : ""
+                }`}
+                onClick={() => setRating(i + 1)}
+                onMouseEnter={() => setHoverRating(i + 1)}
                 onMouseLeave={() => setHoverRating(0)}
               >
                 ★

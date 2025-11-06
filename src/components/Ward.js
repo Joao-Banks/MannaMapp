@@ -3,14 +3,24 @@ import "./styles/Modal.css";
 import AddReview from "./AddReview";
 import SeeReviews from "./SeeReviews";
 import { useMemo } from "react";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-function Ward({ name, complexes, reviews, onAddReview }) {
-  // Calculate average rating (memoized for performance)
+function Ward({
+  id,
+  name,
+  complexes,
+  avgRating = 0,
+  reviews = [],
+  onAddReview,
+}) {
+  // ✅ Fallback to DB avgRating if there are no local reviews
   const averageRating = useMemo(() => {
-    if (reviews.length === 0) return 0;
-    const total = reviews.reduce((sum, r) => sum + r.rating, 0);
-    return total / reviews.length;
-  }, [reviews]);
+    if (reviews.length > 0) {
+      const total = reviews.reduce((sum, r) => sum + (r.rating || 0), 0);
+      return total / reviews.length;
+    }
+    return Number(avgRating) || 0;
+  }, [reviews, avgRating]);
 
   return (
     <div className="ward-card">
@@ -18,13 +28,13 @@ function Ward({ name, complexes, reviews, onAddReview }) {
       <div className="ward-header">
         <h3 className="ward-title">{name}</h3>
 
-        {/* Dynamic stars with half-star logic */}
+        {/* ⭐ Star Rating */}
         <div className="ward-stars">
           {Array.from({ length: 5 }).map((_, i) => {
             const diff = averageRating - i;
-            if (diff >= 1) return <span key={i}>★</span>; // full star
-            if (diff >= 0.5) return <span key={i}>⯪</span>; // half star
-            return <span key={i}>☆</span>; // empty star
+            if (diff >= 1) return <FaStar key={i} color="gold" />;
+            if (diff >= 0.5) return <FaStarHalfAlt key={i} color="gold" />;
+            return <FaRegStar key={i} color="#ccc" />;
           })}
           {reviews.length > 0 && (
             <span className="avg-number">({averageRating.toFixed(1)})</span>
@@ -39,8 +49,8 @@ function Ward({ name, complexes, reviews, onAddReview }) {
 
       {/* Buttons */}
       <div className="ward-buttons">
-        <SeeReviews wardName={name} reviews={reviews} />
-        <AddReview wardName={name} onAddReview={onAddReview} />
+        <SeeReviews wardId={id} wardName={name} />
+        <AddReview wardId={id} wardName={name} onReviewAdded={onAddReview} />
       </div>
     </div>
   );
