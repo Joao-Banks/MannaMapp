@@ -68,3 +68,57 @@
   align-items: center;
   gap: 1rem;
 }
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-family: "Rye", cursive; /* matches your Manna Map theme */
+  color: #5b4636; /* warm bread-tone brown */
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Animated dots */
+.dots::after {
+  content: "...";
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%,
+  20% {
+    color: transparent;
+    text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
+  }
+  40% {
+    color: #e2b97f;
+    text-shadow: 0.25em 0 0 transparent, 0.5em 0 0 transparent;
+  }
+  60% {
+    text-shadow: 0.25em 0 0 #e2b97f, 0.5em 0 0 transparent;
+  }
+  80%,
+  100% {
+    text-shadow: 0.25em 0 0 #e2b97f, 0.5em 0 0 #e2b97f;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

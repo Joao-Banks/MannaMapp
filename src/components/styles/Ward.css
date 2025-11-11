@@ -103,12 +103,6 @@
   font-size: 0.85rem;
 }
 
-.ward-stars {
-  color: var(--color-primary);
-  font-size: 1.2rem;
-  margin-top: 4px;
-}
-
 .avg-number {
   color: var(--color-secondary);
   font-size: 0.9rem;
@@ -128,4 +122,30 @@
   color: var(--color-secondary); /* or a softer brown tone */
   margin-left: 4px;
   font-size: 0.95rem; /* slightly smaller for balance */
+}
+
+.ward-stars {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.stars-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5px; /* small space between last star and number */
+}
+
+.ward-stars svg {
+  margin-right: 1px;
+  vertical-align: middle;
+}
+
+.avg-number {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--color-secondary); /* warm brown to match your palette */
+  line-height: 1;
+  position: relative;
+  top: 1px; /* tiny nudge to align perfectly with stars */
 }

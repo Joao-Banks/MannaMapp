@@ -30,15 +30,19 @@ function Ward({
 
         {/* ⭐ Star Rating */}
         <div className="ward-stars">
-          {Array.from({ length: 5 }).map((_, i) => {
-            const diff = averageRating - i;
-            if (diff >= 1) return <FaStar key={i} color="gold" />;
-            if (diff >= 0.5) return <FaStarHalfAlt key={i} color="gold" />;
-            return <FaRegStar key={i} color="#ccc" />;
-          })}
-          {reviews.length > 0 && (
-            <span className="avg-number">({averageRating.toFixed(1)})</span>
-          )}
+          <div className="stars-group">
+            {Array.from({ length: 5 }).map((_, i) => {
+              const diff = averageRating - i;
+              if (diff >= 1)
+                return <FaStar key={i} color="var(--color-primary)" />;
+              if (diff >= 0.5)
+                return <FaStarHalfAlt key={i} color="var(--color-primary)" />;
+              return <FaRegStar key={i} color="var(--color-accent)" />;
+            })}
+            {averageRating > 0 && (
+              <span className="avg-number">({averageRating.toFixed(1)})</span>
+            )}
+          </div>
         </div>
       </div>
 
