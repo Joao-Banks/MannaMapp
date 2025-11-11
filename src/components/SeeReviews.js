@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import "./styles/Modal.css";
 import "./styles/Ward.css";
+import { supabase } from "../supabaseClient";
 
 function SeeReviews({ wardId, wardName }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -11,23 +12,29 @@ function SeeReviews({ wardId, wardName }) {
 
   useEffect(() => {
     if (!isModalOpen) return; // only fetch when modal is opened
-    setLoading(true);
-    setError("");
 
-    fetch(`http://localhost:4000/api/reviews/${wardId}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Network error");
-        return res.json();
-      })
-      .then((data) => {
-        setReviews(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error loading reviews:", err);
+    const fetchReviews = async () => {
+      setLoading(true);
+      setError("");
+
+      const { data, error } = await supabase
+        .from("Review")
+        .select("review_id, reviewer, rating, comment, date")
+        .eq("ward_id", wardId)
+        .order("date", { ascending: false });
+
+      if (error) {
+        console.error("Error loading reviews:", error);
         setError("Failed to load reviews.");
         setLoading(false);
-      });
+        return;
+      }
+
+      setReviews(data || []);
+      setLoading(false);
+    };
+
+    fetchReviews();
   }, [isModalOpen, wardId]);
 
   return (

@@ -3,39 +3,81 @@ import Ward from "./Ward";
 import "./styles/Search.css";
 import "./styles/Modal.css";
 import reviewsData from "./ReviewsData";
+import { supabase } from "../supabaseClient";
 
 function Search() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState("none");
   const [showResults, setShowResults] = useState(true);
   const [reviews, setReviews] = useState(reviewsData);
-  const [items, setItems] = useState([]); // list of wards from backend
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // --- Fetch wards from Express API ---
+  // --- Fetch wards and complexes from Supabase ---
   useEffect(() => {
-    fetch("http://localhost:4000/api/wards")
-      .then((res) => res.json())
-      .then((data) => {
-        // backend returns ward_id, ward_name, complexes
-        const formatted = data.map((w) => ({
+    const fetchWards = async () => {
+      setLoading(true);
+
+      // Get all wards
+      const { data: wards, error: wardError } = await supabase
+        .from("Ward")
+        .select("ward_id, name");
+
+      if (wardError) {
+        console.error("Error fetching wards:", wardError);
+        setLoading(false);
+        return;
+      }
+
+      // Get relationships between wards and complexes
+      const { data: relations, error: relationError } = await supabase
+        .from("Ward_has_Complex")
+        .select("ward_id, complex_id");
+
+      if (relationError) {
+        console.error("Error fetching relationships:", relationError);
+        setLoading(false);
+        return;
+      }
+
+      // Get all complexes
+      const { data: complexes, error: complexError } = await supabase
+        .from("Complex")
+        .select("complex_id, name");
+
+      if (complexError) {
+        console.error("Error fetching complexes:", complexError);
+        setLoading(false);
+        return;
+      }
+
+      // Combine data into your ward objects
+      const formatted = wards.map((w) => {
+        const wardComplexIds = relations
+          .filter((rel) => rel.ward_id === w.ward_id)
+          .map((rel) => rel.complex_id);
+
+        const wardComplexes = complexes
+          .filter((c) => wardComplexIds.includes(c.complex_id))
+          .map((c) => c.name);
+
+        return {
           ward_id: w.ward_id,
-          name: w.ward_name,
-          complexes: w.complexes ? w.complexes.split(", ") : [],
-          avg_rating: w.avg_rating || 0, // ← new field
-        }));
-        setItems(formatted);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching wards:", err);
-        setLoading(false);
+          name: w.name,
+          complexes: wardComplexes,
+        };
       });
+
+      setItems(formatted);
+      setLoading(false);
+    };
+
+    fetchWards();
   }, []);
 
   if (loading) return <p>Loading wards...</p>;
 
-  // --- Add review handler (local state only) ---
+  // --- Add review handler ---
   function handleAddReview(wardName, newReview) {
     setReviews((prev) => {
       const existingWard = prev.find((w) => w.wardName === wardName);
@@ -51,14 +93,12 @@ function Search() {
     });
   }
 
-  // --- Handle Enter key for search ---
+  // --- Handle Enter key ---
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      setShowResults(true);
-    }
+    if (e.key === "Enter") setShowResults(true);
   };
 
-  // --- Get all unique complexes for dropdown ---
+  // --- Get complexes list for dropdown ---
   const allComplexes = Array.from(
     new Set(items.flatMap((item) => item.complexes))
   ).sort();
@@ -70,15 +110,13 @@ function Search() {
       item.complexes.some((c) => c.toLowerCase().includes(query.toLowerCase()));
 
     const matchesFilter = filter === "none" || item.complexes.includes(filter);
-
     return matchesQuery && matchesFilter;
   });
 
-  // --- Decide whether to show results ---
+  // --- Display results ---
   const shouldShowResults =
     showResults && (query.trim() !== "" || filter !== "none");
 
-  // --- Render ---
   return (
     <div className="search-container">
       <h1 className="search-header">Find a Ward</h1>
@@ -110,21 +148,18 @@ function Search() {
         </select>
       </div>
 
-      {/* --- Results --- */}
       {shouldShowResults && (
         <div className="search-results">
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => {
               const wardReviews =
                 reviews.find((r) => r.wardName === item.name)?.reviews || [];
-
               return (
                 <Ward
                   key={item.ward_id}
                   id={item.ward_id}
                   name={item.name}
                   complexes={item.complexes}
-                  avgRating={item.avg_rating} // ✅ new prop
                   reviews={wardReviews}
                   onAddReview={handleAddReview}
                 />

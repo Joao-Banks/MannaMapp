@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Modal from "./Modal";
 import "./styles/Modal.css";
-import "./styles/AddReview.css"; // keep your styling
+import "./styles/AddReview.css";
+import { supabase } from "../supabaseClient";
 
 function AddReview({ wardId, wardName, onReviewAdded }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -9,6 +10,7 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [reviewer, setReviewer] = useState("");
+
   const openModal = () => {
     setModalOpen(true);
     setRating(0);
@@ -21,7 +23,6 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
       return;
     }
 
-    // --- Prepare review data ---
     const newReview = {
       reviewer: reviewer.trim() || "Anonymous",
       rating,
@@ -30,30 +31,29 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/reviews", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newReview),
-      });
+      const { data, error } = await supabase
+        .from("Review")
+        .insert([newReview])
+        .select();
 
-      const result = await response.json();
-
-      if (result.success) {
-        alert("✅ Review added successfully!");
-        // close modal and reset
-        setModalOpen(false);
-        setReviewer("");
-        setReviewText("");
-        setRating(0);
-        setHoverRating(0);
-
-        // ask parent to refresh the reviews
-        if (onReviewAdded) onReviewAdded();
-      } else {
+      if (error) {
+        console.error("Error inserting review:", error);
         alert("❌ Failed to add review. Please try again.");
+        return;
       }
+
+      alert(`✅ Review added for ${wardName}!`);
+
+      // Reset modal
+      setModalOpen(false);
+      setReviewer("");
+      setReviewText("");
+      setRating(0);
+      setHoverRating(0);
+
+      if (onReviewAdded) onReviewAdded(data[0]);
     } catch (err) {
-      console.error("Error adding review:", err);
+      console.error("Unexpected error:", err);
       alert("Server error while adding review.");
     }
   };
@@ -67,7 +67,6 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
       <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
         <h2 className="modal-title">Add a Review for {wardName}</h2>
 
-        {/* --- Name Input --- */}
         <label className="input-label">Your Name:</label>
         <input
           type="text"
@@ -77,7 +76,6 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
           className="review-input"
         />
 
-        {/* --- Star Rating --- */}
         <div className="star-rating">
           {Array.from({ length: 5 }).map((_, i) => {
             const starValue = i + 1;
@@ -97,7 +95,6 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
           })}
         </div>
 
-        {/* --- Review Text --- */}
         <label className="input-label">Your Review:</label>
         <textarea
           value={reviewText}
@@ -107,7 +104,6 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
           className="review-textarea"
         />
 
-        {/* --- Submit Button --- */}
         <button className="submit-btn" onClick={handleSubmit}>
           Submit Review
         </button>
