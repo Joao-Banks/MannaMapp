@@ -25,11 +25,11 @@ const wardsData = [
   },
   {
     name: "10th Ward",
-    complexes: ["The Ridge", "Jordan Ridge", "Legacy Ridge"],
+    complexes: ["The Ridge"],
   },
   {
     name: "11th Ward",
-    complexes: ["Mountain Crest", "Bountiful Place", "Towers 2"],
+    complexes: ["Mountain Crest", "Bountiful Place", "Towers II"],
   },
   {
     name: "12th Ward",
@@ -37,7 +37,7 @@ const wardsData = [
   },
   {
     name: "13th Ward",
-    complexes: ["Lodge", "Shelbourne"],
+    complexes: ["The Lodge", "Shelbourne"],
   },
   {
     name: "14th Ward",
@@ -60,8 +60,12 @@ const wardsData = [
     complexes: ["The Cedars", "Birch Plaza", "Birch 1", "Birch 2", "Bunkhouse"],
   },
   {
+    name: "19th Ward",
+    complexes: [],
+  },
+  {
     name: "20th Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "21st Ward",
@@ -77,15 +81,15 @@ const wardsData = [
   },
   {
     name: "24th Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "25th Ward",
-    complexes: ["Stonebrook", "Haven House 129", "Haven Green", "Haven Blue"],
+    complexes: ["Haven House 129", "Haven Green", "Haven Blue"],
   },
   {
     name: "26th Ward",
-    complexes: ["Nauvoo House 1", "Centre Square"],
+    complexes: ["Nauvoo House", "Centre Square"],
   },
   {
     name: "27th Ward",
@@ -109,7 +113,7 @@ const wardsData = [
   },
   {
     name: "33rd Ward",
-    complexes: ["The Ridge", "Jordan Ridge", "Riviera"],
+    complexes: ["The Ridge", "Riviera"],
   },
   {
     name: "34th Ward",
@@ -117,7 +121,7 @@ const wardsData = [
   },
   {
     name: "35th Ward",
-    complexes: ["Bountiful Place", "Towers 2"],
+    complexes: ["Bountiful Place", "Towers II"],
   },
   {
     name: "36th Ward",
@@ -160,7 +164,7 @@ const wardsData = [
   },
   {
     name: "43rd Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "44th Ward",
@@ -172,7 +176,7 @@ const wardsData = [
   },
   {
     name: "46th Ward",
-    complexes: ["Nauvoo House 2", "Nauvoo House 1"],
+    complexes: ["Nauvoo House"],
   },
   {
     name: "47th Ward",
@@ -180,7 +184,7 @@ const wardsData = [
   },
   {
     name: "48th Ward",
-    complexes: ["The Ridge", "Legacy Ridge", "Jordan Ridge"],
+    complexes: ["The Ridge"],
   },
   {
     name: "49th Ward",
@@ -192,7 +196,7 @@ const wardsData = [
   },
   {
     name: "51st Ward",
-    complexes: ["Lodge", "Brookside Village", "Shelbourne"],
+    complexes: ["The Lodge", "Brookside Village", "Shelbourne"],
   },
   {
     name: "52nd Ward",
@@ -200,11 +204,11 @@ const wardsData = [
   },
   {
     name: "53rd Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "54th Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "55th Ward",
@@ -245,11 +249,11 @@ const wardsData = [
   },
   {
     name: "63rd Ward",
-    complexes: ["Towers 1", "Gates"],
+    complexes: ["Towers I", "The Gates"],
   },
   {
     name: "64th Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "65th Ward",
@@ -257,7 +261,7 @@ const wardsData = [
   },
   {
     name: "66th Ward",
-    complexes: ["Pines", "Pines"],
+    complexes: ["The Pines"],
   },
   {
     name: "67th Ward",
@@ -265,7 +269,7 @@ const wardsData = [
   },
   {
     name: "68th Ward",
-    complexes: ["Bountiful Place", "Towers 2"],
+    complexes: ["Bountiful Place", "Towers II"],
   },
   {
     name: "69th Ward",
@@ -273,7 +277,7 @@ const wardsData = [
   },
   {
     name: "70th Ward",
-    complexes: ["The Ridge", "Jordan Ridge", "Legacy Ridge"],
+    complexes: ["The Ridge"],
   },
 
   {
@@ -286,7 +290,7 @@ const wardsData = [
   },
   {
     name: "73rd Ward",
-    complexes: ["Gates"],
+    complexes: ["The Gates"],
   },
   {
     name: "74th Ward",
@@ -314,11 +318,11 @@ const wardsData = [
   },
   {
     name: "80th Ward",
-    complexes: ["Gates"],
+    complexes: ["The Gates"],
   },
   {
     name: "81st Ward",
-    complexes: ["Gates"],
+    complexes: ["The Gates"],
   },
   {
     name: "82nd Ward",
@@ -330,7 +334,11 @@ const wardsData = [
   },
   {
     name: "84th Ward",
-    complexes: ["Pines", "Pines"],
+    complexes: ["The Pines"],
+  },
+  {
+    name: "85th Ward",
+    complexes: [],
   },
   {
     name: "88th Ward",
@@ -358,7 +366,7 @@ const wardsData = [
   },
   {
     name: "94th Ward",
-    complexes: ["Avonlea House", "Davenport", "Clarke Apartments", "Pines"],
+    complexes: ["Avonlea House", "Davenport", "Clarke Apartments", "The Pines"],
   },
   {
     name: "95th Ward",
@@ -397,7 +405,7 @@ const wardsData = [
   },
   {
     name: "103rd Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "104th Ward",
@@ -405,7 +413,7 @@ const wardsData = [
   },
   {
     name: "105th Ward",
-    complexes: ["University View", "Gates"],
+    complexes: ["University View", "The Gates"],
   },
   {
     name: "106th Ward",
@@ -413,15 +421,15 @@ const wardsData = [
   },
   {
     name: "107th Ward",
-    complexes: ["Nauvoo House 1", "Nauvoo House 2"],
+    complexes: ["Nauvoo House"],
   },
   {
     name: "108th Ward",
-    complexes: ["Nauvoo House 1", "Nauvoo House 2"],
+    complexes: ["Nauvoo House"],
   },
   {
     name: "109th Ward",
-    complexes: ["Nauvoo House 1", "Nauvoo House 2"],
+    complexes: ["Nauvoo House"],
   },
   {
     name: "110th Ward",
@@ -429,11 +437,11 @@ const wardsData = [
   },
   {
     name: "111th Ward",
-    complexes: ["Towers 1", "University View"],
+    complexes: ["Towers I", "University View"],
   },
   {
     name: "112th Ward",
-    complexes: ["University View", "Towers 1", "Gates"],
+    complexes: ["University View", "Towers I", "The Gates"],
   },
   {
     name: "113th Ward",
@@ -445,15 +453,15 @@ const wardsData = [
   },
   {
     name: "115th Ward",
-    complexes: ["Abby Lane Manor", "Landing"],
+    complexes: ["Abby Lane Manor", "The Landing"],
   },
   {
     name: "116th Ward",
-    complexes: ["Towers 2", "Landing"],
+    complexes: ["Towers II", "The Landing"],
   },
   {
     name: "117th Ward",
-    complexes: ["Rockland", "Landing"],
+    complexes: ["Rockland", "The Landing"],
   },
   {
     name: "118th Ward",
@@ -461,7 +469,7 @@ const wardsData = [
   },
   {
     name: "119th Ward",
-    complexes: ["The Ridge", "Legacy Ridge", "Jordan Ridge"],
+    complexes: ["The Ridge"],
   },
   {
     name: "120th Ward",
@@ -477,11 +485,11 @@ const wardsData = [
   },
   {
     name: "123rd Ward",
-    complexes: ["University View", "Towers 1", "Towers 2", "Gates"],
+    complexes: ["University View", "Towers I", "Towers II", "The Gates"],
   },
   {
     name: "124th Ward",
-    complexes: ["Lodge"],
+    complexes: ["The Lodge"],
   },
   {
     name: "125th Ward",

@@ -92,7 +92,7 @@ function Search() {
     return (
       <div className="loading-container">
         <p className="loading-text">
-          🕊️ Loading wards<span className="dots"></span>
+          Loading wards<span className="dots"></span>
         </p>
       </div>
     );
