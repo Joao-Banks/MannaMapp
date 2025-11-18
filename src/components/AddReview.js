@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import "./styles/Modal.css";
 import "./styles/AddReview.css";
 import { supabase } from "../supabaseClient";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
 function AddReview({ wardId, wardName, onReviewAdded }) {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -38,11 +39,11 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
 
       if (error) {
         console.error("Error inserting review:", error);
-        alert("❌ Failed to add review. Please try again.");
+        alert("Failed to add review. Please try again.");
         return;
       }
 
-      alert(`✅ Review added for ${wardName}!`);
+      alert(`Review added for ${wardName}!`);
 
       // Reset modal
       setModalOpen(false);
@@ -79,17 +80,21 @@ function AddReview({ wardId, wardName, onReviewAdded }) {
         <div className="star-rating">
           {Array.from({ length: 5 }).map((_, i) => {
             const starValue = i + 1;
+            const isFilled = starValue <= (hoverRating || rating);
+
             return (
               <span
                 key={i}
-                className={`star ${
-                  i + 1 <= (hoverRating || rating) ? "filled" : ""
-                }`}
-                onClick={() => setRating(i + 1)}
-                onMouseEnter={() => setHoverRating(i + 1)}
+                onClick={() => setRating(starValue)}
+                onMouseEnter={() => setHoverRating(starValue)}
                 onMouseLeave={() => setHoverRating(0)}
+                className="star"
               >
-                ★
+                {isFilled ? (
+                  <FaStar color="var(--color-primary)" />
+                ) : (
+                  <FaRegStar color="var(--color-accent)" />
+                )}
               </span>
             );
           })}

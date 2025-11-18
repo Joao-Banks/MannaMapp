@@ -83,8 +83,8 @@
   padding: 10px 14px;
   margin-bottom: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  word-wrap: break-word; /* ✅ breaks long words */
-  white-space: pre-wrap; /* ✅ preserves newlines but wraps text */
+  word-wrap: break-word; /* breaks long words */
+  white-space: pre-wrap; /* preserves newlines but wraps text */
 }
 
 .review-rating {
@@ -118,7 +118,7 @@
 }
 
 .review-fraction {
-  font-weight: normal; /* ✅ makes the fraction lighter */
+  font-weight: normal; /* makes the fraction lighter */
   color: var(--color-secondary); /* or a softer brown tone */
   margin-left: 4px;
   font-size: 0.95rem; /* slightly smaller for balance */

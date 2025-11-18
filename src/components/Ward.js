@@ -13,7 +13,7 @@ function Ward({
   reviews = [],
   onAddReview,
 }) {
-  // ✅ Fallback to DB avgRating if there are no local reviews
+  // Fallback to DB avgRating if there are no local reviews
   const averageRating = useMemo(() => {
     if (reviews.length > 0) {
       const total = reviews.reduce((sum, r) => sum + (r.rating || 0), 0);
@@ -28,7 +28,7 @@ function Ward({
       <div className="ward-header">
         <h3 className="ward-title">{name}</h3>
 
-        {/* ⭐ Star Rating */}
+        {/* Star Rating */}
         <div className="ward-stars">
           <div className="stars-group">
             {Array.from({ length: 5 }).map((_, i) => {

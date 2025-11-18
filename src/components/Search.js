@@ -134,7 +134,11 @@ function Search() {
           type="text"
           placeholder="Search Ward or Complex..."
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            setFilter("none"); // reset dropdown
+            setShowResults(true);
+          }}
           onKeyDown={handleKeyDown}
           className="search-input"
         />
@@ -143,6 +147,7 @@ function Search() {
           value={filter}
           onChange={(e) => {
             setFilter(e.target.value);
+            setQuery(""); // reset text search
             setShowResults(true);
           }}
           className="search-select"
