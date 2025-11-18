@@ -29,6 +29,7 @@ h3 {
 p {
   font-family: var(--font-family-body);
   color: var(--color-text);
+  text-align: center;
 }
 
 .title {

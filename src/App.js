@@ -8,6 +8,9 @@ function App() {
   return (
     <div>
       <h1 className="title">Manna Map</h1>
+
+      <p className="tagline">"Helping you find spiritual nourishment near you."</p>
+
       <Hero />
       <Search />
       <Footer></Footer>
