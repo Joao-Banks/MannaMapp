@@ -33,7 +33,7 @@ p {
   color: var(--color-text);
 }
 
-.tagline { 
+.tagline {
   text-align: center;
 }
 
@@ -44,43 +44,28 @@ p {
   color: var(--color-secondary);
 }
 
-/* App wrapper to hold side backgrounds */
-.app-wrapper {
-  display: flex;
-  justify-content: center;
-  position: relative;
-  min-height: 100vh;
-}
-
-/* Left and right side panels with fixed bread image */
-.side-panel {
-  position: fixed;
-  top: 0;
-  width: 360px;
+html,
+body {
   height: 100%;
-  background-repeat: repeat-y;
-  background-size: cover;
-  background-position: center;
-  z-index: 0; /* keep them behind content */
+  margin: 0;
 }
 
-.side-panel.left {
-  left: 0;
+.app-wrapper {
+  height: auto; /* or just delete the height line entirely */
+  margin: 0;
 }
 
-.side-panel.right {
-  right: 0;
+body {
+  font-family: var(--font-family-body);
+  background: url("../public/bread-pattern.png") center / cover no-repeat fixed;
 }
 
-/* Center content */
 .main-content {
   max-width: 800px;
   width: 100%;
-  background-color: var(--color-primary);
+  background-color: var(--color-background);
   padding: 20px;
   box-sizing: border-box;
-  position: relative;
-  z-index: 1; /* ensures it sits above side panels */
-  margin: 0 300px; /* prevents overlap with side panels */
-  box-shadow: #c8a26a 0px 0px 20px;
+  margin: 0 auto;
+  box-shadow: var(--color-primary) 0px 0px 20px;
 }
