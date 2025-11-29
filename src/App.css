@@ -57,7 +57,7 @@ body {
 
 body {
   font-family: var(--font-family-body);
-  background: url("../public/bread-pattern.png") center / cover no-repeat fixed;
+  background: url("../public/bread-design.png") center / cover no-repeat fixed;
 }
 
 .main-content {
